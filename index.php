@@ -2,7 +2,7 @@
 session_start();
 
 // Configuration
-define('YOUTUBE_API_KEY', 'AIzaSyBSIxnwp3bR_tEUwQB0y3vJgJHl-5S5Q08'); // Fill in youtube API key
+define('YOUTUBE_API_KEY', ''); // Fill in youtube API key
 define('DOWNLOADS_DIR', './downloads');
 define('TEMP_DIR', './temp');
 
