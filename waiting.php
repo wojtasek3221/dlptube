@@ -5,6 +5,7 @@ $taskFile = "{$tasksDir}/{$taskId}.json";
 
 $status = null;
 $message = 'Queued...';
+$progress = 0;
 $ready = false;
 $error = null;
 
@@ -19,6 +20,8 @@ if (!$taskId) {
     } else {
         $status = $data['status'] ?? 'queued';
         $message = $data['message'] ?? $status;
+        $progress = (int) ($data['progress'] ?? 0);
+        $progress = max(0, min(100, $progress));
         $ready = ($status === 'finished');
     }
 }
@@ -41,14 +44,26 @@ $showRefresh = !$error && !$ready && $status !== 'error';
 <p>Error: <?php echo htmlspecialchars($error); ?></p>
 
 <?php elseif ($ready): ?>
-<p>Ready!</p>
+<!-- Full bar, old-school table cells so it renders on virtually any browser -->
+<table width="200" border="1" cellpadding="0" cellspacing="0"><tr>
+<td bgcolor="#28a745" width="100%">&nbsp;</td>
+</tr></table>
+<p>100% &mdash; Ready!</p>
 <p><a href="download_file.php?task=<?php echo urlencode($taskId); ?>">Download ready — click to download</a></p>
 
 <?php elseif ($status === 'error'): ?>
 <p>Error: <?php echo htmlspecialchars($message); ?></p>
 
 <?php else: ?>
-<p id="status"><?php echo htmlspecialchars($message); ?></p>
+<table width="200" border="1" cellpadding="0" cellspacing="0"><tr>
+<?php if ($progress > 0): ?>
+<td bgcolor="#007bff" width="<?php echo $progress; ?>%">&nbsp;</td>
+<?php endif; ?>
+<?php if ($progress < 100): ?>
+<td bgcolor="#eeeeee" width="<?php echo (100 - $progress); ?>%">&nbsp;</td>
+<?php endif; ?>
+</tr></table>
+<p id="status"><?php echo $progress; ?>% &mdash; <?php echo htmlspecialchars($message); ?></p>
 <p>This page will refresh automatically. If it doesn't,
 <a href="waiting.php?task=<?php echo urlencode($taskId); ?>">click here to check again</a>.</p>
 <?php endif; ?>

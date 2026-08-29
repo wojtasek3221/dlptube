@@ -16,9 +16,11 @@ if (!$data) {
     exit;
 }
 
+// Don't leak server paths in production; you can return only filename or a download token
 echo json_encode([
     'status' => $data['status'],
     'message' => $data['message'],
+    'progress' => $data['progress'] ?? 0,
     'filename' => $data['filename'] ?? null,
     'ready' => ($data['status'] === 'finished')
 ]);
