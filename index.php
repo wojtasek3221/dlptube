@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Sixtyfour&display=swap">
 <style>
-/* ... (your existing styles) ... */
 /* Additional style for channel header */
 .channel-header { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 8px; padding: 20px; margin-bottom: 20px; }
 .channel-header h2 { margin-top: 0; }
@@ -199,7 +198,6 @@ $thumb = $video['snippet']['thumbnails']['default']['url'] ?? '';
 
 </div>
 <script>
-// ... (your existing typewriter script) ...
 </script>
 </body>
 </html>

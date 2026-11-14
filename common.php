@@ -6,7 +6,7 @@ $subscriptions = isset($_COOKIE['dlp_subs']) ? json_decode($_COOKIE['dlp_subs'],
 if (!is_array($subscriptions)) $subscriptions = [];
 
 // ---------- Configuration ----------
-define('YOUTUBE_API_KEY', getenv('YOUTUBE_API_KEY') ?: '');
+define('YOUTUBE_API_KEY', ''); // Replace with your own key
 define('DOWNLOADS_DIR', './downloads');
 define('TEMP_DIR', './temp');
 
